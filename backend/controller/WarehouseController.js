@@ -8,5 +8,17 @@ const FindEveryWarehouse = async ()=>{
     return AllWarehouse;
 }
 
+//Create a new warehouse
+const CreateWarehouse = async WarehouseSpecs =>{
+    try{
+        const NewWarehouse = new Warehouse(WarehouseSpecs);
+        await NewWarehouse.save();
+        return NewWarehouse;
+    }
+    catch(err){
+        throw err;
+    }
+}
 
-module.exports = {FindEveryWarehouse }
+
+module.exports = {FindEveryWarehouse, CreateWarehouse }
