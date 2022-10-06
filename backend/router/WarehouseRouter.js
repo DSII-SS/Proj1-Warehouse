@@ -2,7 +2,7 @@
 
 const router = require('express').Router();
 const  mongoose = require('mongoose');
-const {FindEveryWarehouse, CreateWarehouse, DeleteWarehouse } = require('../controller/WarehouseController');
+const {FindEveryWarehouse, CreateWarehouse, DeleteWarehouse, UpdateWarehouse } = require('../controller/WarehouseController');
 const Warehouse = require('../model/WarehouseModel');
 
 //GET all warehouses
@@ -38,6 +38,20 @@ router.delete('/:id', async(req,res)=>{
         res.status(err?.status ?? 500).json(err);
     }
 });
+
+//Update a warehouse
+//PUT http://localhost:9000/warehouse/{id} 
+router.put('/:id', async(req,res)=>{
+    try{
+        const FreshWarehouse = await UpdateWarehouse(req.params.id, req.body);
+        res.statusMessage = `Update Warehouse ${req.params.id} Successful`;  //Give confirmation that the correct update was succesful
+        res.status(200).json(FreshWarehouse);
+    }
+    catch(err){
+        res.status(err?.status ?? 500).json(err);
+    }
+});
+
 
 
 module.exports = router;

@@ -32,5 +32,20 @@ const DeleteWarehouse = async WarehouseID =>{
     }
 }
 
+const UpdateWarehouse = async (WarehouseID, WarehouseEntry) =>{
+    try{
+        const UpdatedWarehouse = await Warehouse.findOneAndUpdate({"W_ID": WarehouseID}, WarehouseEntry);
+        if(UpdatedWarehouse == null){
+            throw{status: 400, msg: `No Warehouse with the id ${WarehouseID} was found`}
+        }
+        if(WarehouseEntry.WIDGETS.WIDGETCOUNT > UpdatedWarehouse.MAX_CAPACITY){
+            throw{status: 400, msg: `Warehouse ${WarehouseID} has reached max capacity`}
+        }
+    }
+    catch(err){
+        throw err;
+    }
+}
 
-module.exports = {FindEveryWarehouse, CreateWarehouse, DeleteWarehouse }
+
+module.exports = {FindEveryWarehouse, CreateWarehouse, DeleteWarehouse, UpdateWarehouse }

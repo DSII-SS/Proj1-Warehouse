@@ -30,7 +30,9 @@ const WarehouseSchema = new Schema({
     WIDGETS: {
         WIDGETCOUNT: {
             type: Number,
-            default: 0
+            default: 0,
+            //validate: [(WH)=> WH <= this.MAX_CAPACITY , `Maximum capacity exceeded. Please update capacity to ${this.MAX_CAPACITY}`]
+            //max: [this.MAX_CAPACITY, 'Maximum capacity exceeded. Please update capacity']
         },
         WIDGETDESIGNATION:{
             type: String,
