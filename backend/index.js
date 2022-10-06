@@ -12,7 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-//app.use('/warehouse',WarehouseRouter)
+const WarehouseRouter = require('./router/WarehouseRouter');
+app.use('/warehouse',WarehouseRouter);
 
 
 const ConnectToMongo = async () => {
