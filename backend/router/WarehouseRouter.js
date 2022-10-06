@@ -2,7 +2,8 @@
 
 const router = require('express').Router();
 const  mongoose = require('mongoose');
-const {FindEveryWarehouse, CreateWarehouse } = require('../controller/WarehouseController')
+const {FindEveryWarehouse, CreateWarehouse, DeleteWarehouse } = require('../controller/WarehouseController');
+const Warehouse = require('../model/WarehouseModel');
 
 //GET all warehouses
 //GET http://localhost:9000/warehouse
@@ -12,11 +13,11 @@ router.get('/', async(req, res)=>{
 });
 
 //Create a new warehouse
-//POST http://localhost:9000/warehouse
+//POST http://localhost:9000/warehouse  {JSON in body}
 router.post('/', async (req,res)=>{
     try{
         const NewWarehouse = await CreateWarehouse(req.body);
-        //res.status(201).json(NewWarehouse);
+        res.status(201).json(NewWarehouse);
     }
     catch(err){
         //Proper backend validation to be included in a future update. Mainly front-end for now.
@@ -24,5 +25,19 @@ router.post('/', async (req,res)=>{
         res.status(err?.status ?? 500).json(err); //?  → return null if it's empty
     }
 });
+
+//Delete a warehouse
+//DELETE http://localhost:9000/warehouse/{id} 
+router.delete('/:id', async(req,res)=>{
+    try{
+        const DoomedWarehouse = await DeleteWarehouse(req.params.id);
+        res.statusMessage = `Delete Warehouse ${req.params.id} Successful`;  //Give confirmation that the correct deletion was succesful
+        res.status(200).json(DoomedWarehouse);
+    }
+    catch(err){
+        res.status(err?.status ?? 500).json(err);
+    }
+});
+
 
 module.exports = router;

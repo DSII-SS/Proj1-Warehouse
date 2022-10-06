@@ -20,5 +20,17 @@ const CreateWarehouse = async WarehouseSpecs =>{
     }
 }
 
+const DeleteWarehouse = async WarehouseID =>{
+    try{
+        const DoomedWarehouse = await Warehouse.findOneAndDelete({"W_ID": WarehouseID});
+        if(DoomedWarehouse == null){
+            throw{status: 400, msg: `No Warehouse with the id ${WarehouseID} was found`}
+        }
+    }
+    catch(err){
+        throw err;
+    }
+}
 
-module.exports = {FindEveryWarehouse, CreateWarehouse }
+
+module.exports = {FindEveryWarehouse, CreateWarehouse, DeleteWarehouse }
