@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { NewWarehouse } from './NewWarehouse';
 
 const Warehouses =({warehouse: {W_ID, W_NAME, MAX_CAPACITY, WIDGETS}})=>{
 
@@ -19,6 +20,10 @@ export const ListWarehouse=()=>{
     
     //It will initialize to an empty array rather than undefined
     const [WarehouseList, SetWarehouseList]=useState([]); 
+    const [SubmitForm, SetSubmitForm]=useState(false);
+    const btn1 = 'Submit New Warehouse';
+    const btn2 = 'Return';
+    const [BtnText, SetBtnText]=useState(false);
 
     useEffect(()=>{
 
@@ -32,8 +37,13 @@ export const ListWarehouse=()=>{
 
     }, []);
 
+    function GetBtnTxt(){
+        if(BtnText == false){return btn1;}
+        else{return btn2;}
+    }
+
     return (
-        <>
+        <>        
         <table>
             <thead>
                 <tr>
@@ -48,6 +58,9 @@ export const ListWarehouse=()=>{
                 {WarehouseList.map(warehouse => <Warehouses key={warehouse.id} warehouse={warehouse}/>)}
             </tbody>
         </table>
+        <button id='SubmitButton' onClick={() => {SetSubmitForm(!SubmitForm); SetBtnText(!BtnText)}}>{GetBtnTxt()}</button>
+        {SubmitForm && <NewWarehouse SetWarehouseList={SetWarehouseList}/>}
+        
         </>
     )
 

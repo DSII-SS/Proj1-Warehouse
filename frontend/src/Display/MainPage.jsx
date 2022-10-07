@@ -4,10 +4,12 @@ import { ListWarehouse } from '../Components/ListWarehouses';
 
 
 export const MainPage=()=>{
+    const [ShowWarehouses, ToggleShowWarehouses] = useState(false);
 
     return(
     <>
-    <ListWarehouse />
+    <button onClick={()=> ToggleShowWarehouses(!ShowWarehouses) }>Show Warehouses</button>
+    {ShowWarehouses && <> <ListWarehouse /></>}
     </>
     )
 }
