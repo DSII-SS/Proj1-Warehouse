@@ -12,6 +12,10 @@ const FindEveryWarehouse = async ()=>{
 const CreateWarehouse = async WarehouseSpecs =>{
     try{
         const NewWarehouse = new Warehouse(WarehouseSpecs);
+        const DuplicateWarehouse = await Warehouse.findOne({"W_ID": NewWarehouse.W_ID});
+        if(DuplicateWarehouse){
+            throw{status: 400, msg: `Duplicate Warehouse with the id ${NewWarehouse.W_ID} was found`} //Don't allow creation of warehouse with same ID
+        }
         await NewWarehouse.save();
         return NewWarehouse;
     }
@@ -37,7 +41,7 @@ const UpdateWarehouse = async (WarehouseID, WarehouseEntry) =>{
 
         const CheckWarehouse = await Warehouse.findOne({"W_ID": WarehouseID});
         if(WarehouseEntry.WIDGETS.WIDGETCOUNT > CheckWarehouse.MAX_CAPACITY){
-            throw{status: 400, msg: `Warehouse ${WarehouseID} has reached max capacity`}
+            throw{status: 400, msg: `Warehouse ${WarehouseID} has reached max capacity`} //Don't allow warehouse widgets to go above max capacity
         }
         if(CheckWarehouse == null){
             throw{status: 400, msg: `No Warehouse with the id ${WarehouseID} was found`}
