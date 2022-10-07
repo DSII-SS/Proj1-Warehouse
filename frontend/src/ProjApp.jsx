@@ -5,6 +5,7 @@ export const ProjApp=()=>{
     return(
         <>
         <MainPage />
+        <footer>Foot!?</footer>
         </>
     )
 }

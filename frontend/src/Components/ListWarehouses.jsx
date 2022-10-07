@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const Warehouses =({warehouse: {W_ID, W_NAME, MAX_CAPACITY, WIDGETS}})=>{
 
     return(
-        <>
+        
         <tr>
             <td>{W_ID}</td>
             <td>{W_NAME}</td>
@@ -12,7 +12,6 @@ const Warehouses =({warehouse: {W_ID, W_NAME, MAX_CAPACITY, WIDGETS}})=>{
             <td>{WIDGETS?.WIDGETCOUNT}</td>
             <td>{WIDGETS?.WIDGETDESIGNATION}</td>  
         </tr>
-        </>
     )
 }
 
@@ -29,6 +28,8 @@ export const ListWarehouse=()=>{
             .then(res=>{SetWarehouseList(res.data); console.log(res.data);})
             .catch(err=> console.log(err)); //This could easily be to render an error display
 
+        console.log(WarehouseList);
+
     }, []);
 
     return (
@@ -37,14 +38,14 @@ export const ListWarehouse=()=>{
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Warehouse Name</th>
-                    <th>Max Capacity</th>
-                    <th>Current Capacity</th>
-                    <th>Widget Name</th>
+                    <th>Warehouse_Name</th>
+                    <th>Max_Capacity</th>
+                    <th>Current_Capacity</th>
+                    <th>Widget_Name</th>
                 </tr>
             </thead>
             <tbody>
-                {WarehouseList.map(warehouse => <Warehouses key={warehouse.id} warehouses={warehouse} />)}
+                {WarehouseList.map(warehouse => <Warehouses key={warehouse.id} warehouse={warehouse}/>)}
             </tbody>
         </table>
         </>
