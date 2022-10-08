@@ -17,10 +17,6 @@ export const DeleteWarehouse=({SetWarehouseList})=>{
         catch(err){
             console.log(err);
         }
-        
-        
-
-
     }
     
     return(
