@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { DeleteWarehouse } from './DeleteWarehouse';
 import { NewWarehouse } from './NewWarehouse';
 
 const Warehouses =({warehouse: {W_ID, W_NAME, MAX_CAPACITY, WIDGETS}})=>{
@@ -21,6 +22,7 @@ export const ListWarehouse=()=>{
     //It will initialize to an empty array rather than undefined
     const [WarehouseList, SetWarehouseList]=useState([]); 
     const [SubmitForm, SetSubmitForm]=useState(false);
+    const [DeleteForm, SetDeleteForm]=useState(false);
     const btn1 = 'Submit New Warehouse';
     const btn2 = 'Return';
     const [BtnText, SetBtnText]=useState(false);
@@ -37,6 +39,7 @@ export const ListWarehouse=()=>{
 
     }, []);
 
+    //A bit of flavor to change the text of the submit button after we click it
     function GetBtnTxt(){
         if(BtnText == false){return btn1;}
         else{return btn2;}
@@ -58,9 +61,14 @@ export const ListWarehouse=()=>{
                 {WarehouseList.map(warehouse => <Warehouses key={warehouse.id} warehouse={warehouse}/>)}
             </tbody>
         </table>
-        <button id='SubmitButton' onClick={() => {SetSubmitForm(!SubmitForm); SetBtnText(!BtnText)}}>{GetBtnTxt()}</button>
-        {SubmitForm && <NewWarehouse SetWarehouseList={SetWarehouseList}/>}
-        
+        <div>
+            <button id='SubmitButton' onClick={() => {SetSubmitForm(!SubmitForm); SetBtnText(!BtnText)}}>{GetBtnTxt()}</button>
+            {SubmitForm && <NewWarehouse SetWarehouseList={SetWarehouseList}/>}
+
+            <button id='DeleteButton' onClick={() => {SetDeleteForm(!DeleteForm)}}>DELETE</button>
+            {DeleteForm && <DeleteWarehouse SetWarehouseList={SetWarehouseList}/>}
+        </div>
+
         </>
     )
 

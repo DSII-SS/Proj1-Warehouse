@@ -21,7 +21,7 @@ export const NewWarehouse=({SetWarehouseList})=>{
      */
     const SubmitWarehouse = async (event)=>{
         event.preventDefault();
-        console.log(WarehouseData);
+        //console.log(WarehouseData);
         try{ 
             const res = await axios.post('http://localhost:9000/warehouse', {
                 W_ID: WarehouseData.whID,
