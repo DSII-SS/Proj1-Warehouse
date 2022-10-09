@@ -1,38 +1,38 @@
 import { useState } from "react";
 import axios from "axios";
 
-export const UpdateWarehouse=({SetWarehouseList})=>{
+export const UpdateWarehouse=({SetRenderUpdate})=>{
 
     //const [OldWarehouse, SetOldWarehouse] = useState('')
     const [FixedWarehouseID, SetFixedWarehouseID] = useState(0);
-    const [FixedWarehouseName, SetFixedWarehouseName] = useState({
-        UpdatedWarehouseName: null,
-    });
+    // const [FixedWarehouseName, SetFixedWarehouseName] = useState({
+    //     UpdatedWarehouseName: null,
+    // });
     const [FixedWidgetCount, SetFixedWidgetCount] = useState({
         UpdatedWidgetCount: null,
     });
-    const [FixedWidgetName, SetFixedWidgetName] = useState({
-        UpdatedWidgetName: null
-    });
+    // const [FixedWidgetName, SetFixedWidgetName] = useState({
+    //     UpdatedWidgetName: null
+    // });
 
     
     const UpdateWarehouse = async (event)=>{
         event.preventDefault();
-        console.log('In UpdateWarehouse');
-        console.log(FixedWidgetCount);
+        // console.log('In UpdateWarehouse');
+        // console.log(FixedWidgetCount);
 
         //Don't try to change an attribute if the field is empty in the submit form
         //Do we want to update the inventory of widgets?
         if(FixedWidgetCount){
             try{
-                console.log('In the try');
+                // console.log('In the try');
                 const res = await axios.put(`http://localhost:9000/warehouse/${FixedWarehouseID}`,{
                     WIDGETS:{
                         WIDGETCOUNT: FixedWidgetCount
                     }
                 })
-                SetWarehouseList(FixedWidgetCount => [...FixedWidgetCount]);
-                console.log('Through the try');
+                SetRenderUpdate(!SetRenderUpdate);
+                // console.log('Through the try');
             }
             catch(err){console.log(err)}
             

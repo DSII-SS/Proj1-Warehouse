@@ -49,6 +49,7 @@ export const NewWarehouse=({SetWarehouseList})=>{
                         type="number" 
                         min="0"
                         step="1"
+                        required="true"
                         placeholder="ID# Here" 
                         onChange={e => SetWarehouseData({...WarehouseData, whID: e.target.value})}
                         value={WarehouseData.whID}
@@ -56,7 +57,8 @@ export const NewWarehouse=({SetWarehouseList})=>{
                     <label htmlFor="whNAME-box">Name: </label>
                     <input 
                         id="whNAME-box"
-                        type="text" 
+                        type="text"
+                        required="true" 
                         placeholder="Warehouse Name Here" 
                         onChange={e => SetWarehouseData({...WarehouseData, whNAME: e.target.value})}
                         value={WarehouseData.whNAME}
@@ -67,6 +69,7 @@ export const NewWarehouse=({SetWarehouseList})=>{
                         type="number" 
                         min="1"
                         step="1"
+                        required="true"
                         placeholder="Maximum Capacity Here" 
                         onChange={e => SetWarehouseData({...WarehouseData, whMAX: e.target.value})}
                         value={WarehouseData.whMAX}
@@ -76,7 +79,8 @@ export const NewWarehouse=({SetWarehouseList})=>{
                     <label htmlFor="whWIDGET-box">Widget: </label>
                     <input 
                         id="whWIDGET-box"
-                        type="text" 
+                        type="text"
+                        required="true" 
                         placeholder="Widget Name Here" 
                         onChange={e => SetWarehouseData({...WarehouseData, whWIDGET_NAME: e.target.value})}
                         value={WarehouseData.whWIDGET_NAME}

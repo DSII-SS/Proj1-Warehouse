@@ -22,9 +22,11 @@ export const ListWarehouse=()=>{
     
     
     const [WarehouseList, SetWarehouseList]=useState([]); //It will initialize to an empty array rather than undefined
+    const [RenderUpdate, SetRenderUpdate]=useState(false);
     const [SubmitForm, SetSubmitForm]=useState(false);
     const [DeleteForm, SetDeleteForm]=useState(false);
     const [UpdateForm, SetUpdateForm]=useState(false);
+
 
     const btn1 = 'Submit New Warehouse';
     const btn2 = 'Return';
@@ -69,10 +71,10 @@ export const ListWarehouse=()=>{
             {SubmitForm && <NewWarehouse SetWarehouseList={SetWarehouseList}/>}
 
             <button id='DeleteButton' onClick={() => {SetDeleteForm(!DeleteForm)}}>DELETE</button>
-            {DeleteForm && <DeleteWarehouse SetWarehouseList={SetWarehouseList}/>}
+            {DeleteForm && <DeleteWarehouse SetRenderUpdate={SetRenderUpdate}/>}
 
             <button id='UpdateButton' onClick={() => {SetUpdateForm(!UpdateForm)}}>UPDATE</button>
-            {UpdateForm && <UpdateWarehouse SetWarehouseList={SetWarehouseList}/>}
+            {UpdateForm && <UpdateWarehouse SetRenderUpdate={SetRenderUpdate}/>}
         </div>
 
         </>

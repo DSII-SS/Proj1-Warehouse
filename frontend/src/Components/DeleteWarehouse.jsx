@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 
-export const DeleteWarehouse=({SetWarehouseList})=>{
+export const DeleteWarehouse=({SetRenderUpdate})=>{
 
     const [DoomedWarehouse, SetDoomedWarehouse] = useState(0)
 
@@ -11,7 +11,7 @@ export const DeleteWarehouse=({SetWarehouseList})=>{
 
         try{
             const res = await axios.delete(`http://localhost:9000/warehouse/${DoomedWarehouse}`)
-            SetWarehouseList(dw => [...dw, res.data]);
+            SetRenderUpdate(!SetRenderUpdate);
             
         }
         catch(err){
