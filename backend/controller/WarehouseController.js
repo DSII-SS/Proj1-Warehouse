@@ -47,8 +47,23 @@ const UpdateWarehouse = async (WarehouseID, WarehouseEntry) =>{
             throw{status: 400, msg: `No Warehouse with the id ${WarehouseID} was found`}
         }
 
-        const UpdatedWarehouse = await Warehouse.findOneAndUpdate({"W_ID": WarehouseID}, WarehouseEntry);
+        //Make  sure not to give an empty widget count or name
+        let FixedWarehouse = WarehouseEntry
+        //console.log(FixedWarehouse.WIDGETS.WIDGETCOUNT, FixedWarehouse.WIDGETS.WIDGETDESIGNATION, CheckWarehouse.WIDGETS.WIDGETCOUNT, CheckWarehouse.WIDGETS.WIDGETDESIGNATION );
+        
+        //New name but no new count = keep the old count
+        if(!WarehouseEntry.WIDGETS.WIDGETCOUNT && WarehouseEntry.WIDGETS.WIDGETDESIGNATION){
+            //console.log('new name but no new count');
+            FixedWarehouse.WIDGETS.WIDGETCOUNT = CheckWarehouse.WIDGETS.WIDGETCOUNT
+        } 
 
+        //New count but no new name = keep the old name
+        if(!WarehouseEntry.WIDGETS.WIDGETDESIGNATION && WarehouseEntry.WIDGETS.WIDGETCOUNT){
+            //console.log('new count but no new name');
+            FixedWarehouse.WIDGETS.WIDGETDESIGNATION = CheckWarehouse.WIDGETS.WIDGETDESIGNATION
+        } 
+
+        const UpdatedWarehouse = await Warehouse.findOneAndUpdate({"W_ID": WarehouseID}, FixedWarehouse);
         
     }
     catch(err){
