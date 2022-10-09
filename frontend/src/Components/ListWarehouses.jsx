@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { DeleteWarehouse } from './DeleteWarehouse';
 import { NewWarehouse } from './NewWarehouse';
+import { UpdateWarehouse } from './UpdateWarehouse';
 
 const Warehouses =({warehouse: {W_ID, W_NAME, MAX_CAPACITY, WIDGETS}})=>{
 
@@ -19,10 +20,12 @@ const Warehouses =({warehouse: {W_ID, W_NAME, MAX_CAPACITY, WIDGETS}})=>{
 
 export const ListWarehouse=()=>{
     
-    //It will initialize to an empty array rather than undefined
-    const [WarehouseList, SetWarehouseList]=useState([]); 
+    
+    const [WarehouseList, SetWarehouseList]=useState([]); //It will initialize to an empty array rather than undefined
     const [SubmitForm, SetSubmitForm]=useState(false);
     const [DeleteForm, SetDeleteForm]=useState(false);
+    const [UpdateForm, SetUpdateForm]=useState(false);
+
     const btn1 = 'Submit New Warehouse';
     const btn2 = 'Return';
     const [BtnText, SetBtnText]=useState(false);
@@ -67,6 +70,9 @@ export const ListWarehouse=()=>{
 
             <button id='DeleteButton' onClick={() => {SetDeleteForm(!DeleteForm)}}>DELETE</button>
             {DeleteForm && <DeleteWarehouse SetWarehouseList={SetWarehouseList}/>}
+
+            <button id='UpdateButton' onClick={() => {SetUpdateForm(!UpdateForm)}}>UPDATE</button>
+            {UpdateForm && <UpdateWarehouse SetWarehouseList={SetWarehouseList}/>}
         </div>
 
         </>
