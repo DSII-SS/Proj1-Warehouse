@@ -7,7 +7,7 @@ export const DeleteWarehouse=({SetRenderUpdate})=>{
     const [DoomedWarehouse, SetDoomedWarehouse] = useState(0)
 
     const RemoveWarehouse = async (event)=>{
-        event.preventDefault();
+        //event.preventDefault();
 
         try{
             const res = await axios.delete(`http://localhost:9000/warehouse/${DoomedWarehouse}`)

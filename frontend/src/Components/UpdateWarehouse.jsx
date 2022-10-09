@@ -17,7 +17,7 @@ export const UpdateWarehouse=({SetRenderUpdate})=>{
 
     
     const UpdateWarehouse = async (event)=>{
-        event.preventDefault();
+        //event.preventDefault();
         // console.log('In UpdateWarehouse');
         // console.log(FixedWidgetCount);
 
